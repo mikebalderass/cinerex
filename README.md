@@ -16,7 +16,7 @@ Entre otras cosas.
 
 ## Equipo de desarrollo🤝
 - Balderas Balderas Miguel Angel
-- Mosco Aquino Emmanuel
+- Moscoso Aquino Emmanuel
 - Rosas Serratos Gael
  
 ## Tecnologías🖥️
