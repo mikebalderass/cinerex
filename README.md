@@ -59,6 +59,7 @@ SEED_ADMIN=true
 ##
 > **📝 Nota:**  
 > Al correr el projecto se registra un administrador con userName: admin y password: admin123, para poder hacer uso del sistema.
+> Antes de iniciar el projecto, ingresar a la carpeta de backend y hacer npm install
 
 
 
