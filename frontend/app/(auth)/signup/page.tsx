@@ -32,7 +32,7 @@ export default function SignupPage() {
       confirmPassword: "",
     },
   });
-  const { signup, user } = useAuth();
+  const { signup } = useAuth();
 
   async function onSubmit(data: z.infer<typeof signupSchema>) {
     try {

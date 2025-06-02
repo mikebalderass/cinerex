@@ -5,12 +5,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "moviepostermexico.com",
+        hostname: "www.themoviedb.org",
         port: "",
         pathname: "/**",
       },
     ],
-  }
+  },
+  output: "standalone",
 };
 
 export default nextConfig;

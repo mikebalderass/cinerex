@@ -1,3 +1,5 @@
+"use client";
+
 import { updateMovie } from "@/actions/movies";
 import { useMovie } from "@/hooks/use-movies";
 import { movieSchema } from "@/lib/schemas";

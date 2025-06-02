@@ -2,12 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, LogOut, MapPin, Search, Star, Ticket, Users } from "lucide-react";
+import {
+  Clock,
+  LogOut,
+  MapPin,
+  Search,
+  Star,
+  Ticket,
+  Users,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import type { MovieType, FunctionType, TheaterType } from "@/lib/types";
+import type { MovieType, FunctionType, TheaterType, SeatType } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useMovies } from "@/hooks/use-movies";
 import { useTheaters } from "@/hooks/use-theaters";
@@ -29,7 +37,7 @@ export default function CinemaHomepage() {
     return `${hours}h ${mins}m`;
   };
 
-  const formatShowtime = (datetime: Date): string => {
+  const formatShowtime = (datetime: string): string => {
     const date = new Date(datetime);
     return date.toLocaleTimeString("en-US", {
       hour: "numeric",
@@ -43,18 +51,17 @@ export default function CinemaHomepage() {
     return theater?.theaterNumber || "Unknown Theater";
   };
 
-  const getAvailableSeats = (functionItem: FunctionType): number => {
-    if (!functionItem.seats) return 120; // Default seat count
-    return functionItem.seats.filter((seat) => seat.status === "AVAILABLE")
-      .length;
+  const getAvailableSeats = (seats: SeatType[]): number => {
+    const availableSeats = seats.filter((seat) => seat.status === "AVAILABLE");
+    return availableSeats.length;
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (user) {
-      logout();
+      await logout();
       router.push("/login");
     }
-  }
+  };
 
   useEffect(() => {
     if (movies && movies.length > 0) {
@@ -167,7 +174,7 @@ export default function CinemaHomepage() {
                             </div>
                             <span className="text-xs opacity-80 flex items-center">
                               <Users className="h-3 w-3 mr-1" />
-                              {getAvailableSeats(func)} asientos disponibles
+                              {getAvailableSeats(func.seats || [])} asientos disponibles
                             </span>
                           </Button>
                         </Link>

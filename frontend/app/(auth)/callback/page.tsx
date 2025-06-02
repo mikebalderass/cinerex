@@ -24,7 +24,7 @@ export default function Callback() {
       if (user.role.includes("Customer")) {
         router.push("/");
       } else if (user.role.includes("Admin")) {
-        router.push("/admin");
+        router.push("/dashboard");
       }
     }
   }, [user, isLoading, router]);

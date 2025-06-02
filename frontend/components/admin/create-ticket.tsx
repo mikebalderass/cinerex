@@ -91,7 +91,7 @@ export function CreateTicketModal({
         ticketId: `ticket-${Date.now()}`,
         functionId: formData.functionId,
         userName: formData.userName,
-        purchaseDate: new Date(),
+        purchaseDate: new Date().toISOString(),
         seats: selectedSeats,
       };
 

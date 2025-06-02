@@ -23,7 +23,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (username: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   signup: (
     name: string,
     email: string,
@@ -98,9 +98,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    setIsAuthenticated(false);
+  const logout = async () => {
+    try {
+      await api.post("/auth/logout");
+      setUser(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      throw new Error("No se pudo cerrar sesión. Por favor, inténtalo más tarde.");
+    }
   };
 
   const signup = async (
@@ -112,9 +118,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await api.post("/auth/signup", {
         name,
-        email,
+        userEmail: email,
         userName: username,
         userPassword: password,
+        userRole: ["Customer"],
       });
       const response = await api.get("/auth/me");
       setUser({
